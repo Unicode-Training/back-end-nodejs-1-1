@@ -230,3 +230,65 @@ if (dieukien1) {
 }
 
 ```
+
+5.2. Câu lệnh switch case
+
+- Chỉ chấp nhận so sánh ===
+- Áp dụng cho các trường có nhiều nhánh và nhiều điều kiện hoặc
+
+6. Vòng lặp
+
+Cú pháp trong lập trình cho phép đoạn chương trình chạy lặp đi lặp theo số lần nào đó để giải quyết bài toán
+
+- Vòng lặp với số lần lặp xác định trước: for
+- Vòng lặp với số lần lặp không xác định trước: while, do while
+
+Từ khóa chung trong vòng lặp:
+
+- break
+- continue
+
+  6.1. Vòng lặp for
+
+```
+for (bienchay = giatrikhoitao; dieukienchay; buocnhay) {
+    Logic
+}
+```
+
+6.2. Vòng lặp while
+
+```
+while (dieukien) {
+    Câu lệnh
+}
+
+do {
+    Câu lệnh
+}
+while (dieukien)
+```
+
+7. Function
+
+- Cú pháp của ngôn ngữ lập trình
+- Cho phép nhóm các đoạn chương trình để tiện cho việc tái sử dụng
+
+Cú pháp:
+
+```
+function tenHam() {
+    Code
+}
+
+function tenHam(thamso1, thamso2,...) {
+    Code
+}
+```
+
+--> Declaration function
+
+Quy tắc đặt tên:
+
+- Dùng động từ: make, get, set, print, show, is, check....
+- Đặt theo camelCase
