@@ -292,3 +292,51 @@ Quy tắc đặt tên:
 
 - Dùng động từ: make, get, set, print, show, is, check....
 - Đặt theo camelCase
+
+## Package
+
+### Khởi tạo dự án sử dụng npm
+
+npm init -y
+
+### Cài đặt các dependencies
+
+npm i hoặc npm install
+
+### Cài đặt thư viện cụ thể
+
+npm i tenthuvien hoặc npm install tenthuvien
+
+Nếu muốn cài phiên bản cụ thể: npm i tenthuvien@phienban hoặc npm install tenthuvien@@phienban
+
+### Các loại dependencies
+
+- Simple Dependency: Các thư viện phục vụ cho môi trường product (Phải có nó thì mới chạy được dự án)
+
+- Dev Dependency: Các thư viện phục vụ cho môi trường dev (Chỉ cần khi dev, khi deploy lên server thì không cần)
+
+npm i tenthuvien --save-dev
+
+Nếu chỉ muốn cài đặt các dependency ở simple dependency: npm i --product
+
+### Gỡ bỏ dependency
+
+npm uninstall tenthuvien
+
+### Làm việc với phiên bản
+
+npm i tenthuvien@phienban
+
+npm update tenthuvien --> Cập nhật lên bản mới nhất của phiên bản đã được cấu hình trong package.json
+
+### Sự khác nhau giữa npm install và npm update
+
+- npm install: Cài theo package-log.json, nếu không có thì theo package.json
+- npm update: Cài theo package.json
+
+### Chế độ cài
+
+- Local: Mặc định
+- Global: npm i tenthuvien -g
+
+Lưu ý: Cần phải đưa folder node_modules vào .gitignore --> Không push lên git
