@@ -340,3 +340,26 @@ npm update tenthuvien --> Cập nhật lên bản mới nhất của phiên bả
 - Global: npm i tenthuvien -g
 
 Lưu ý: Cần phải đưa folder node_modules vào .gitignore --> Không push lên git
+
+## NodeJS
+
+Khi file js chạy trong môi trường node
+
+- Có thể thao tác với các thành phần trên server: file, database, protocol,...
+- Mặc định sử dụng commonjs
+- Có sẵn các module: http, url, fs,..
+
+Ví dụ: Dùng module http để tạo http server để giúp client có thể gửi http request lên server và server trả về http response
+
+HTTP REQUEST
+
+- URL
+- METHOD
+- HEADERS
+- BODY
+
+HTTP RESPONSE
+
+- BODY
+- STATUS CODE, TEXT
+- HEADER

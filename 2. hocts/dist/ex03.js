@@ -57,3 +57,13 @@
 // user.age = 32;
 // const numbers: readonly number[] = [1, 2, 3, 4];
 // numbers[5] = 10;
+//Interface
+// interface User {
+//   name: string;
+//   readonly email: string;
+// }
+// const user: User = {
+//   name: "An",
+//   email: "hoangan.web@gmail.com",
+// };
+// user.email = "ahihi";
