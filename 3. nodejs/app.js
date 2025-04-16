@@ -41,33 +41,63 @@ const url = require("url");
 //   ];
 //   res.end(JSON.stringify(users));
 // });
-const users = require("./modules/users");
-const products = require("./modules/products");
-const routes = {
-  "/users": users.index,
-  "/products": products.index,
-  "/users/:userId": users.detail,
-};
+const routes = require("./route");
 
 const server = http.createServer((req, res) => {
   const urlParse = url.parse(req.url, true);
   const pathname = urlParse.pathname;
   let func;
 
-  res.setHeader("Content-Type", "application/json; charset=utf-8");
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
   for (let route in routes) {
     const value = routes[route];
-    const key = route.replace(/\:.+/g, "(.+?)");
-    const paramList = route.match(/\:.+/g);
+    const key = route.replace(/\:\w+/g, "(.+?)");
+    const paramList = route.match(/\:\w+/g);
     const pattern = new RegExp(`^${key}$`);
     const match = pathname.match(pattern);
     if (match) {
-      const param = match[1];
       func = value;
-      if (!req.params) {
-        req.params = {};
+
+      //Xử lý url params
+      if (paramList?.length) {
+        if (!req.params) {
+          req.params = {};
+        }
+        for (let i = 0; i < paramList.length; i++) {
+          const param = match[i + 1];
+          const paramName = paramList[i].replace(":", "");
+          if (param && paramName) {
+            req.params[paramName] = param;
+          }
+        }
       }
-      req.params[paramList[0].replace(":", "")] = param;
+
+      //Xử lý url query string
+      if (urlParse.search) {
+        const searchQuery = new URLSearchParams(urlParse.search);
+        req.query = Object.fromEntries(searchQuery.entries());
+      } else {
+        req.query = {};
+      }
+
+      //Xử lý headers
+      if (req.headers) {
+        req.get = (key) => req.headers[key];
+      }
+
+      //Xử lý response
+      res.json = (data) => {
+        res.setHeader("Content-Type", "application/json; charset=utf-8");
+        return res.end(JSON.stringify(data));
+      };
+      res.send = (data) => {
+        res.end(data);
+      };
+      res.status = (code) => {
+        res.statusCode = code;
+        return res;
+      };
+      res.set = res.setHeader;
       break;
     }
   }

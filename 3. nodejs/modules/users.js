@@ -1,7 +1,16 @@
+const path = require("path");
+const fs = require("fs");
 module.exports = {
   index: (req, res) => {
-    const users = ["User 1", "User 2", "User 3", "User 4"];
-    return res.end(JSON.stringify(users));
+    // const users = ["User 1", "User 2", "User 3", "User 4"];
+    // console.log(`search: `, req.query.search);
+    // console.log(`status: `, req.query.status);
+    // const apiKey = req.get("x-api-key");
+    // console.log(`x-api-key: `, apiKey);
+    // res.set("x-abc", "123");
+    // return res.status(201).send("abc");
+    const filePath = path.join(__dirname, "../data/data1.json");
+    return res.json(JSON.parse(fs.readFileSync(filePath)));
   },
   detail: (req, res) => {
     const id = req.params.userId;
