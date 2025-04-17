@@ -363,3 +363,5 @@ HTTP RESPONSE
 - BODY
 - STATUS CODE, TEXT
 - HEADER
+
+## Biến môi trường trong các dự án

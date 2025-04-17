@@ -10,6 +10,8 @@ module.exports = {
     // res.set("x-abc", "123");
     // return res.status(201).send("abc");
     const filePath = path.join(__dirname, "../data/data1.json");
+    console.log(process.env.APP_NAME);
+    console.log(process.env.APP_EMAIL);
     return res.json(JSON.parse(fs.readFileSync(filePath)));
   },
   detail: (req, res) => {

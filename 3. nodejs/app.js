@@ -1,46 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const http = require("http");
 const url = require("url");
 //Khởi tạo server
-// const server = http.createServer((req, res) => {
-//   const urlParse = url.parse(req.url, true);
-//   const pathname = urlParse.pathname;
-//   //   const queryString = urlParse.search;
-//   //   const searchParams = new URLSearchParams(queryString);
-//   //   const searchValue = searchParams.get("search");
-//   //   console.log(`Search value: ${searchValue}`);
-
-//   //   const method = req.method;
-//   //   console.log(`Method: ${method}`);
-//   //   const xApiKey = req.headers["x-api-key"];
-//   //   console.log(`x-api-key: ${xApiKey}`);
-//   //   let body = "";
-//   //   req.on("data", (buffer) => {
-//   //     body += buffer.toString();
-//   //   });
-
-//   //   return req.on("end", () => {
-//   //     console.log(body);
-//   //     res.end(body);
-//   //   });
-
-//   res.setHeader("Content-Type", "application/json; charset=utf-8");
-//   res.setHeader("x-api-key", "ahihi");
-//   const users = [
-//     {
-//       id: 1,
-//       name: "Hoàng An",
-//     },
-//     {
-//       id: 2,
-//       name: "Hoàng An 2",
-//     },
-//     {
-//       id: 3,
-//       name: "Hoàng An 3",
-//     },
-//   ];
-//   res.end(JSON.stringify(users));
-// });
 const routes = require("./route");
 
 const server = http.createServer((req, res) => {
