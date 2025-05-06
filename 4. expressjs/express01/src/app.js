@@ -3,7 +3,10 @@ const app = express();
 const routerIndex = require("./routes/index");
 // const authMiddleware = require("./middlewares/auth.middleware");
 app.use(express.json()); //middleware parse body
-app.use(express.urlencoded());
+app.use(express.urlencoded()); //urlencoded
+
+app.use(express.static("public"));
+
 // app.use(authMiddleware);
 app.use("/api", routerIndex);
 
