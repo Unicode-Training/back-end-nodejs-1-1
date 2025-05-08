@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import UserService from "../services/user.service";
+import { Injectable } from "../core/decorators";
 
+@Injectable
 export default class UserController {
-  constructor() {}
+  constructor(private userService: UserService) {}
   index(req: Request, res: Response) {
-    const userService = new UserService();
-    res.json({ data: userService.findAll() });
+    const users = this.userService.findAll();
+    res.json({ data: users });
   }
   private something() {
     return "something";

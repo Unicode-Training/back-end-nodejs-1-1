@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import express from "express";
 const router: any = express.Router();
 import { indexController } from "../controllers/index.controller";
