@@ -1,0 +1,23 @@
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { UsersModule } from './modules/users/users.module';
+import { ProductsModule } from './modules/products/products.module';
+import { PostsModule } from './modules/posts/posts.module';
+import { AuthMiddleware } from './common/middlewares/auth/auth.middleware';
+
+@Module({
+  imports: [UsersModule, ProductsModule, PostsModule],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    // consumer.apply(AuthMiddleware).forRoutes('*');
+    consumer.apply(AuthMiddleware).forRoutes('users/*');
+    // consumer.apply(AuthMiddleware).forRoutes({
+    //   path: 'users/*',
+    //   method: RequestMethod.GET,
+    // });
+  }
+}

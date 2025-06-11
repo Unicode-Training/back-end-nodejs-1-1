@@ -54,4 +54,28 @@ CASE
 	ELSE 3
 END
 ) AS `status_order` FROM `orders`
-ORDER BY `status_order` ASC
+ORDER BY `status_order` ASC;
+
+-- Trả về danh sách sản phẩm kèm theo số tiền bán được của từng sản phẩm
+SELECT `products`.*, SUM(`order_details`.`amount`) AS `total`, 
+`inventory`.`total` AS `purchase_total`,
+(
+CASE
+	WHEN SUM(`order_details`.`amount`) > `inventory`.`total` THEN 'Lãi'
+	ELSE 'Lỗ'
+END
+) AS `rate`,
+CONCAT(
+ROUND(((SUM(`order_details`.`amount`) - `inventory`.`total`) / `inventory`.`total` * 100)),
+'%')
+AS `diff`
+FROM `products`
+INNER JOIN `inventory`
+ON `products`.`id` = `inventory`.`product_id`
+LEFT JOIN `order_details`
+ON `products`.`id` = `order_details`.`product_id`
+GROUP BY `order_details`.`product_id`;
+
+-- Index
+-- Locks
+-- Transactions
