@@ -1,0 +1,7 @@
+{
+  "name.required": "Tên bắt buộc phải nhập",
+  "email.email": "Email không hợp lệ",
+  "status.invalid": "Trạng thái không hợp lệ",
+  "password.invalid": "Password không hợp lệ",
+  "email.unique": "Email đã tồn tại"
+}
