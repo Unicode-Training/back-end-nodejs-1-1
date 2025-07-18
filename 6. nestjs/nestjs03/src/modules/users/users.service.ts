@@ -15,6 +15,7 @@ import { APP_CONFIG } from 'src/configs/app';
 import { Phone } from 'src/entites/phone.entity';
 import { Post } from 'src/entites/posts.entity';
 import { Course } from 'src/entites/course.entity';
+import { OnEvent } from '@nestjs/event-emitter';
 
 @Injectable()
 export class UsersService {
@@ -234,6 +235,7 @@ export class UsersService {
     }
   }
 
+  @OnEvent('order.completed')
   async addCourses(userId: number, courses: number[]) {
     if (!userId || !Array.isArray(courses)) {
       return;

@@ -2,11 +2,11 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
   ManyToMany,
+  OneToMany,
 } from 'typeorm';
 import { User } from './user.entity';
+import { OrderDetail } from './order-detail.entity';
 
 @Entity('courses')
 export class Course {
@@ -25,6 +25,9 @@ export class Course {
 
   @ManyToMany(() => User, (user) => user.courses)
   users: User[];
+
+  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.course)
+  orderDetails: OrderDetail[];
 
   @Column({
     type: 'timestamp',

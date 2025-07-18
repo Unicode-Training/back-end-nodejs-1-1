@@ -10,6 +10,7 @@ import {
 import { Phone } from './phone.entity';
 import { Post } from './posts.entity';
 import { Course } from './course.entity';
+import { Order } from './order.entity';
 
 @Entity('users')
 export class User {
@@ -35,6 +36,9 @@ export class User {
     },
   })
   courses: Course[];
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 
   @Column({
     type: 'varchar',

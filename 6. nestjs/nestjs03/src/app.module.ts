@@ -6,6 +6,8 @@ import { UsersModule } from './modules/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entites/user.entity';
 import { CoursesModule } from './modules/courses/courses.module';
+import { OrdersModule } from './modules/orders/orders.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -24,6 +26,8 @@ import { CoursesModule } from './modules/courses/courses.module';
       logging: true,
     }),
     CoursesModule,
+    OrdersModule,
+    EventEmitterModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
