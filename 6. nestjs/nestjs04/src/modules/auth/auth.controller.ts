@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Req,
   Request,
   UnauthorizedException,
   UseGuards,
@@ -35,11 +36,20 @@ export class AuthController {
   }
 
   @Post('/refresh-token')
-  refreshToken(@Body() body: any) {
-    const result = this.authService.refreshToken(body);
+  async refreshToken(@Body() body: any) {
+    const result = await this.authService.refreshToken(body);
     if (!result) {
       throw new UnauthorizedException("Refresh token isn't valid");
     }
     return result;
+  }
+
+  @Post('/logout')
+  @UseGuards(AuthGuard)
+  logout(@Request() req: any) {
+    const { user } = req;
+    const jti = user.jti;
+    const exp = user.exp;
+    return this.authService.logout(jti, exp);
   }
 }

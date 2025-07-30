@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RedisModule } from '@nestjs-modules/ioredis';
 @Module({
   imports: [
     AuthModule,
@@ -22,6 +23,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize:
         process.env.NODE_ENV === 'development' || !process.env.NODE_ENV,
       logging: true,
+    }),
+    RedisModule.forRoot({
+      type: 'single',
+      url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
     }),
   ],
   controllers: [AppController],
