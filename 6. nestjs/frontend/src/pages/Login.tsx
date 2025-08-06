@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../stores/user-store";
 interface FormInterface {
   email: string;
   password: string;
@@ -8,6 +9,9 @@ export default function Login() {
   const [form, setForm] = useState<FormInterface>({} as FormInterface);
   const [msg, setMsg] = useState<string>("");
   const navigate = useNavigate();
+  const setUser = useUserStore((state) => state.setUser);
+  const setAuthenticated = useUserStore((state) => state.setAuthenticated);
+  const setLoading = useUserStore((state) => state.setLoading);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
@@ -30,10 +34,15 @@ export default function Login() {
       setMsg("Invalid credentials");
       return;
     }
-    const { accessToken, refreshToken } = await response.json();
+    const { accessToken, refreshToken, user } = await response.json();
     //Lưu token vào localStorage
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", refreshToken);
+
+    //Lưu user vào store
+    setUser(user);
+    setAuthenticated(true);
+    setLoading(false);
 
     //Chuyển hướng về trang chủ
     navigate("/");
