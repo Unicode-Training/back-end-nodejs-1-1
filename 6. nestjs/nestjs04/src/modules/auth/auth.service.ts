@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/entites/user.entity';
 import Hash from 'src/utils/hashing';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import Redis from 'ioredis';
 import { InjectRedis } from '@nestjs-modules/ioredis';
@@ -84,6 +84,29 @@ export class AuthService {
     return this.userRepository.findOne({
       where: { id },
     });
+  }
+
+  async updateProfile(user: any, body: any) {
+    //Check email
+    const id = user.id;
+    const email = body.email;
+    const emailExists = await this.userRepository.findOne({
+      where: {
+        email,
+        id: Not(id),
+      },
+    });
+    if (emailExists) {
+      return false;
+    }
+    const dataUpdate = {
+      ...user,
+      ...body,
+    };
+    if (body.password) {
+      dataUpdate.password = Hash.make(body.password);
+    }
+    return this.userRepository.save(dataUpdate);
   }
 
   verifyToken = (token: string) => {

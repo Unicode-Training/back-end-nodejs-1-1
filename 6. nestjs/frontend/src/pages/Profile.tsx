@@ -9,10 +9,30 @@ interface FormProfile {
 export default function Profile() {
   const [form, setForm] = useState<FormProfile>({} as FormProfile);
   const user = useUserStore((state) => state.user);
+  const [message, setMessage] = useState("");
+  const setUser = useUserStore((state) => state.setUser);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) return;
+    const response = await fetch(
+      `${import.meta.env.VITE_SERVER_API}/auth/profile`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(form),
+      }
+    );
+    const { success, data } = await response.json();
+    if (!success) {
+      setMessage("Email is exists");
+      return;
+    }
+    setUser(data);
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -65,7 +85,7 @@ export default function Profile() {
           />
         </div>
         <div className="mb-3">
-          <label>Password</label>
+          <label>Confirm Password</label>
           <input
             type="password"
             className="border px-3 py-2 w-full"
@@ -80,6 +100,7 @@ export default function Profile() {
         >
           Cập nhật
         </button>
+        {message && <p className="text-red-600">{message}</p>}
       </form>
     </div>
   );

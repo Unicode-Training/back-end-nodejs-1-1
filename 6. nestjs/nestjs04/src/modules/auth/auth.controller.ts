@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
   Post,
   Req,
   Request,
@@ -33,6 +34,22 @@ export class AuthController {
   @Get('/profile')
   profile(@Request() req: any) {
     return req.user;
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch('/profile')
+  async updateProfile(@Request() req: any, @Body() body: any) {
+    const data = await this.authService.updateProfile(req.user, body);
+    if (!data) {
+      return {
+        success: false,
+        message: 'Email is exists',
+      };
+    }
+    return {
+      success: true,
+      data,
+    };
   }
 
   @Post('/refresh-token')
