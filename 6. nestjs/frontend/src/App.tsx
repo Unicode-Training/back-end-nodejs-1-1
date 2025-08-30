@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Header from "./components/Header";
 import Profile from "./pages/Profile";
 import AuthMiddleware from "./middlewares/AuthMiddleware";
+import Google from "./pages/Google";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route element={<AuthMiddleware />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
+          <Route path="/auth/google/callback" element={<Google />} />
         </Routes>
       </div>
     </div>

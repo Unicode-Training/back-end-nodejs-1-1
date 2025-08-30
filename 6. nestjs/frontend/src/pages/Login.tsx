@@ -79,6 +79,12 @@ export default function Login() {
         >
           Login
         </button>
+        <a
+          href={`${import.meta.env.VITE_SERVER_API}/auth/google/redirect`}
+          className="block w-full bg-red-900 text-white py-2 cursor-pointer  text-center mt-3"
+        >
+          Login with Google
+        </a>
         {msg && <p className="text-red-500">{msg}</p>}
       </form>
     </div>
