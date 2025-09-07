@@ -88,10 +88,34 @@ export class AuthService {
     return this.createToken(user);
   }
 
-  profile(id: number) {
-    return this.userRepository.findOne({
+  async profile(id: number) {
+    const user = await this.userRepository.findOne({
       where: { id },
+      relations: {
+        roles: {
+          permissions: true,
+        },
+      },
     });
+    if (!user) {
+      return false;
+    }
+    const permissions: string[] = [];
+    if (user.roles) {
+      user.roles.forEach((role) => {
+        if (role.permissions) {
+          role.permissions.forEach((permission: { name: string }) => {
+            if (!permissions.includes(permission.name)) {
+              permissions.push(permission.name);
+            }
+          });
+        }
+      });
+      delete (user as any).roles;
+      (user as any).permissions = permissions;
+    }
+
+    return user;
   }
 
   verifyToken = (token: string) => {

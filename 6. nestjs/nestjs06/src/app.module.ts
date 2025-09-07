@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RedisModule } from '@nestjs-modules/ioredis';
+import { RolesModule } from './roles/roles.module';
+import { ProductsModule } from './products/products.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -28,6 +30,8 @@ import { RedisModule } from '@nestjs-modules/ioredis';
       url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
     }),
     AuthModule,
+    RolesModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

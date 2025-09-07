@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Role } from './role.entity';
+import { Permission } from './permission.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -29,6 +31,12 @@ export class User {
     default: 1,
   })
   status: boolean;
+
+  @ManyToMany(() => Role, (role) => role.users)
+  roles: Role[];
+
+  @ManyToMany(() => Permission, (permission) => permission.users)
+  permissions: Permission[];
 
   @Column({
     type: 'timestamp',
