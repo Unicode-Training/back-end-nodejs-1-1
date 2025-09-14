@@ -18,6 +18,10 @@ export class RolesController {
   findAll() {
     return this.rolesService.findAll();
   }
+  @Get(':id')
+  findOne(@Param('id') id: number) {
+    return this.rolesService.findOne(id);
+  }
   @Post()
   create(@Body() body: any) {
     return this.rolesService.create(body);

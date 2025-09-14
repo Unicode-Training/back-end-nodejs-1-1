@@ -15,6 +15,14 @@ export class RolesService {
   findAll() {
     return this.rolesRepository.find();
   }
+  findOne(id: number) {
+    return this.rolesRepository.findOne({
+      where: { id },
+      relations: {
+        permissions: true,
+      },
+    });
+  }
   create(role: any) {
     return this.rolesRepository.save(role);
   }

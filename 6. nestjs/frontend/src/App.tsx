@@ -5,6 +5,9 @@ import Header from "./components/Header";
 import Profile from "./pages/Profile";
 import AuthMiddleware from "./middlewares/AuthMiddleware";
 import Google from "./pages/Google";
+import Roles from "./pages/Admin/Roles/Roles";
+import EditRole from "./pages/Admin/Roles/EditRole";
+import { Toaster } from "./components/ui/sonner";
 
 export default function App() {
   return (
@@ -18,8 +21,13 @@ export default function App() {
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/auth/google/callback" element={<Google />} />
+          <Route path="/admin" element={<AuthMiddleware />}>
+            <Route path="roles" element={<Roles />} />
+            <Route path="roles/:id" element={<EditRole />} />
+          </Route>
         </Routes>
       </div>
+      <Toaster position="bottom-right" />
     </div>
   );
 }

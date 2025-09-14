@@ -1,0 +1,22 @@
+[
+  {
+    "name": "users",
+    "title": "Quản lý người dùng",
+    "actions": ["read", "create", "update", "delete", "permissions"]
+  },
+  {
+    "name": "products",
+    "title": "Quản lý sản phẩm",
+    "actions": ["read", "create", "update", "delete", "export"]
+  },
+  {
+    "name": "posts",
+    "title": "Quản lý bài viết",
+    "actions": ["read", "create", "update", "delete"]
+  },
+  {
+    "name": "orders",
+    "title": "Quản lý đơn hàng",
+    "actions": ["read", "create", "update", "delete"]
+  }
+]
