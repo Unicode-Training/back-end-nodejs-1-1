@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RedisModule } from '@nestjs-modules/ioredis';
 import { RolesModule } from './roles/roles.module';
 import { ProductsModule } from './products/products.module';
+import { EventGateway } from './gateway/event/event.gateway';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -34,6 +35,6 @@ import { ProductsModule } from './products/products.module';
     ProductsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, EventGateway],
 })
 export class AppModule {}

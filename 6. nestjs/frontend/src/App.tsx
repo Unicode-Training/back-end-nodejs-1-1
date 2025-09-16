@@ -8,6 +8,8 @@ import Google from "./pages/Google";
 import Roles from "./pages/Admin/Roles/Roles";
 import EditRole from "./pages/Admin/Roles/EditRole";
 import { Toaster } from "./components/ui/sonner";
+import Socket from "./pages/Socket";
+import Chat from "./pages/Chat";
 
 export default function App() {
   return (
@@ -16,6 +18,8 @@ export default function App() {
       <div className="mt-3">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/socket" element={<Socket />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/login" element={<Login />} />
           <Route element={<AuthMiddleware />}>
             <Route path="/profile" element={<Profile />} />
